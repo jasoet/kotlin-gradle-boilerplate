@@ -3,6 +3,8 @@ buildscript {
         kotlinVersion = "1.2.21"
         coroutineVersion = "0.22.3"
         arrowVersion = "0.6.1"
+
+        jUnitVersion = '4.12'
     }
 
     repositories {
@@ -21,8 +23,14 @@ plugins {
     id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3"
 }
 
-group 'id.yoframework'
+group 'org.yourcompany'
 version '0.1'
+
+apply plugin: "jacoco"
+apply plugin: "application"
+apply plugin: "idea"
+
+mainClassName = "org.yourcompany.boilerplate.Application"
 
 repositories {
     mavenLocal()
@@ -35,6 +43,14 @@ dependencies {
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
 
     compile "io.arrow-kt:arrow-core:$arrowVersion"
+
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
+    testCompile "junit:junit:$jUnitVersion"
+}
+
+jacoco {
+    toolVersion = "0.8.0"
 }
 
 detekt {
@@ -46,9 +62,9 @@ detekt {
     }
 }
 
-
 test {
     finalizedBy detektCheck
+    finalizedBy jacocoTestReport
     testLogging {
         events "passed", "skipped", "failed"
     }
@@ -83,6 +99,8 @@ compileTestKotlin {
         allWarningsAsErrors = true
     }
 }
+
+task compile(dependsOn: "testClasses")
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.5.1'
