@@ -1,10 +1,12 @@
 buildscript {
     ext {
-        kotlinVersion = "1.2.21"
+        kotlinVersion = "1.2.30"
         coroutineVersion = "0.22.3"
         arrowVersion = "0.6.1"
 
-        jUnitVersion = '4.12'
+        jUnitVersion = "5.1.0"
+        spekVersion = "1.1.5"
+        kluentVersion = "1.35"
     }
 
     repositories {
@@ -18,8 +20,8 @@ buildscript {
 }
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.2.21"
-    id "org.jetbrains.kotlin.kapt" version "1.2.21"
+    id "org.jetbrains.kotlin.jvm" version "1.2.30"
+    id "org.jetbrains.kotlin.kapt" version "1.2.30"
     id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3"
 }
 
@@ -49,9 +51,19 @@ dependencies {
     compile "io.arrow-kt:arrow-syntax:$arrowVersion"
     kapt "io.arrow-kt:arrow-annotations-processor:$arrowVersion"
 
+    testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
-    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
-    testCompile "junit:junit:$jUnitVersion"
+    testCompile "org.amshove.kluent:kluent:$kluentVersion"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
+
+    testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testRuntime("org.jetbrains.spek:spek-junit-platform-engine:$spekVersion") {
+        exclude group: 'org.jetbrains.kotlin'
+    }
 }
 
 jacoco {
@@ -70,6 +82,11 @@ detekt {
 test {
     finalizedBy detektCheck
     finalizedBy jacocoTestReport
+
+    useJUnitPlatform {
+        includeEngines 'spek'
+    }
+
     testLogging {
         events "passed", "skipped", "failed"
     }
@@ -124,5 +141,5 @@ idea {
 task compile(dependsOn: "testClasses")
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.5.1'
+    gradleVersion = '4.6'
 }
