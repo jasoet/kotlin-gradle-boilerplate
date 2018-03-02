@@ -3,11 +3,11 @@
 Boilerplate code to create gradle based Kotlin application.
 
 ## Features
-- Kotlin/JVM with kapt
+- Kotlin/JVM with Kapt
 - Kotlin Coroutine
 - Strict Kotlin enable allWarningsAsErrors 
 - [Arrow Library](http://arrow-kt.io/)
-- Unit test with Kotlin test and JUnit 4
+- Unit test with [Spek](http://spekframework.org/), JUnit 5 and [Kluent](https://markusamshove.github.io/Kluent/)
 - Static code check using [Detekt](https://github.com/arturbosch/detekt) 
 - Code coverage using Jacoco 
 
@@ -19,6 +19,12 @@ $ curl -s "https://get.sdkman.io" | bash
 $ source "$HOME/.sdkman/bin/sdkman-init.sh"
 $ sdk version
 $ sdk install java
+```
+
+### Install Gradle 4.6 or higher
+```sh
+$ sdk update
+$ sdk install gradle
 ```
 
 ## Usage
