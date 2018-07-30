@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = "1.2.30"
+        kotlinVersion = "1.2.51"
         coroutineVersion = "0.22.3"
         arrowVersion = "0.6.1"
 
@@ -20,9 +20,9 @@ buildscript {
 }
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.2.30"
-    id "org.jetbrains.kotlin.kapt" version "1.2.30"
-    id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3"
+    id "org.jetbrains.kotlin.jvm" version "1.2.51"
+    id "org.jetbrains.kotlin.kapt" version "1.2.51"
+    id "io.gitlab.arturbosch.detekt" version "1.0.0.RC8"
 }
 
 group 'org.yourcompany'
@@ -71,7 +71,7 @@ jacoco {
 }
 
 detekt {
-    version = "1.0.0.RC6-3"
+    version = "1.0.0.RC8"
     profile("main") {
         input = "$projectDir/src/main/kotlin"
         config = "$rootDir/detekt.yml"
@@ -140,6 +140,6 @@ idea {
 
 task compile(dependsOn: "testClasses")
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.6'
+wrapper {
+    gradleVersion = '4.9'
 }
