@@ -6,10 +6,10 @@ Boilerplate code to create gradle based Kotlin application.
 - Kotlin/JVM with Kapt
 - Kotlin Coroutine
 - Strict Kotlin enable allWarningsAsErrors 
-- [Arrow Library](http://arrow-kt.io/)
 - Unit test with [Spek](http://spekframework.org/), JUnit 5 and [Kluent](https://markusamshove.github.io/Kluent/)
 - Static code check using [Detekt](https://github.com/arturbosch/detekt) 
 - Code coverage using Jacoco 
+- Logging with Logback
 
 ## Requirements
 ### Install Java SDK 8

@@ -1,12 +1,13 @@
 buildscript {
     ext {
         kotlinVersion = "1.2.51"
-        coroutineVersion = "0.22.3"
-        arrowVersion = "0.6.1"
+        coroutineVersion = "0.24.0"
 
         jUnitVersion = "5.1.0"
         spekVersion = "1.1.5"
         kluentVersion = "1.35"
+
+        logbackVersion = "1.2.3"
     }
 
     repositories {
@@ -43,6 +44,9 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
+
+    compile "ch.qos.logback:logback-core:$logbackVersion"
+    compile "ch.qos.logback:logback-classic:$logbackVersion"
 
     testCompile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"

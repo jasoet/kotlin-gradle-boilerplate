@@ -1,0 +1,27 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender" level="INFO">
+        <encoder>
+            <pattern>%date{dd MMM yyyy;HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %marker%n%ex{short}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>%date{dd MMM yyyy;HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %marker%n%ex{full}</pattern>
+        </encoder>
+        <file>/var/log/example/application.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/example/application.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+    <logger name="org.yourcompany" level="INFO">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
