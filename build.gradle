@@ -91,7 +91,7 @@ test {
     finalizedBy jacocoTestReport
 
     useJUnitPlatform {
-        includeEngines 'spek'
+        includeEngines 'spek2'
     }
 
     testLogging {
