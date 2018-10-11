@@ -2,6 +2,7 @@ buildscript {
     ext {
         kotlinVersion = "1.3.0-rc-146"
         coroutineVersion = "0.30.2-eap13"
+        serializationVersion = "0.8.2-rc13"
 
         arrowVersion = "0.7.3"
 
@@ -12,6 +13,15 @@ buildscript {
         kluentVersion = "1.4"
 
         logbackVersion = "1.2.3"
+    }
+
+    repositories {
+        jcenter()
+        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion"
     }
 }
 
@@ -27,11 +37,14 @@ version '0.1'
 apply plugin: "jacoco"
 apply plugin: "application"
 apply plugin: "idea"
+apply plugin: 'kotlinx-serialization'
 
 mainClassName = "org.yourcompany.boilerplate.Application"
 
 repositories {
     maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+    maven { url "https://kotlin.bintray.com/ktor" }
     mavenLocal()
     mavenCentral()
     jcenter()
@@ -40,10 +53,11 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile "org.jetbrains.kotlin:kotlin-reflect"
-    compile("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion") {
-        exclude group: 'org.jetbrains.kotlin'
-    }
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
+    compile "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
+
     compile "io.arrow-kt:arrow-core:$arrowVersion"
+    compile "io.ktor:ktor-client-apache:$ktorVersion"
 
     compile "ch.qos.logback:logback-core:$logbackVersion"
     compile "ch.qos.logback:logback-classic:$logbackVersion"
