@@ -16,24 +16,59 @@
 
 package org.yourcompany.boilerplate
 
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.gherkin.Feature
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 object ApplicationSpec : Spek({
-    given("a calculator") {
-        on("addition") {
-            val sum = 6
-            it("should return the result of adding the first number to the second number") {
-                assertEquals(6, sum)
+    Feature("Set") {
+        val set by memoized { mutableSetOf<String>() }
+
+        Scenario("adding items") {
+            When("adding foo") {
+                set.add("foo")
+            }
+
+            Then("it should have a size of 1") {
+                assertEquals(1, set.size)
+            }
+
+            Then("it should contain foo") {
+                assertTrue(set.contains("foo"))
             }
         }
-        on("subtraction") {
-            val subtract = 2
-            it("should return the result of subtracting the second number from the first number") {
-                assertEquals(2, subtract)
+
+        Scenario("empty") {
+            Given("an empty set") {
+                // assume(set.isEmpty())
+            }
+            Then("should have a size of 0") {
+                assertEquals(0, set.size)
+            }
+
+            Then("should throw when first is invoked") {
+                assertFailsWith(NoSuchElementException::class) {
+                    set.first()
+                }
+            }
+        }
+
+        Scenario("getting first item") {
+            val item = "foo"
+            Given("a non-empty set") {
+                set.add(item)
+            }
+
+            lateinit var result: String
+
+            When("getting the first item") {
+                result = set.first()
+            }
+
+            Then("it should return the first item") {
+                assertEquals(item, result)
             }
         }
     }

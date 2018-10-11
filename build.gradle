@@ -1,7 +1,7 @@
 buildscript {
     ext {
         kotlinVersion = "1.3.0-rc-146"
-        coroutineVersion = "0.30.2"
+        coroutineVersion = "0.30.2-eap13"
 
         arrowVersion = "0.7.3"
 
@@ -18,7 +18,7 @@ buildscript {
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.0-rc-146'
     id "org.jetbrains.kotlin.kapt" version "1.3.0-rc-146"
-    id "io.gitlab.arturbosch.detekt" version "1.0.0.RC9.2"
+    id "io.gitlab.arturbosch.detekt"  version "1.0.0.RC8"
 }
 
 group 'org.yourcompany'
@@ -55,10 +55,11 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
 
-    testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
+    testImplementation ("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")  {
         exclude group: 'org.jetbrains.kotlin'
     }
-    testRuntime("org.jetbrains.spek:spek-junit-platform-engine:$spekVersion") {
+    testRuntimeOnly ("org.spekframework.spek2:spek-runner-junit5:$spekVersion") {
+        exclude group: 'org.junit.platform'
         exclude group: 'org.jetbrains.kotlin'
     }
 }
