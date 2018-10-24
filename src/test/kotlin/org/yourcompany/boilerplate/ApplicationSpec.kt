@@ -16,59 +16,23 @@
 
 package org.yourcompany.boilerplate
 
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.gherkin.Feature
-import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
+import org.amshove.kluent.shouldEqual
+import org.jetbrains.spek.api.Spek
+import org.jetbrains.spek.api.dsl.context
+import org.jetbrains.spek.api.dsl.describe
+import org.jetbrains.spek.api.dsl.it
+import org.yourcompany.boilerplate.serializer.ProductExample
+import org.yourcompany.boilerplate.serializer.toJson
 
 object ApplicationSpec : Spek({
-    Feature("Set") {
-        val set by memoized { mutableSetOf<String>() }
+    describe("A ProductExample") {
+        val product = ProductExample("12", "Sepatu Naga", 200000, "Sepatu penyembur api")
+        context("when converted to Json String") {
+            it("Should return correct Result") {
+                val expectedResult =
+                    "{\"id\":\"12\",\"name\":\"Sepatu Naga\",\"price\":200000,\"description\":\"Sepatu penyembur api\"}"
 
-        Scenario("adding items") {
-            When("adding foo") {
-                set.add("foo")
-            }
-
-            Then("it should have a size of 1") {
-                assertEquals(1, set.size)
-            }
-
-            Then("it should contain foo") {
-                assertTrue(set.contains("foo"))
-            }
-        }
-
-        Scenario("empty") {
-            Given("an empty set") {
-                // assume(set.isEmpty())
-            }
-            Then("should have a size of 0") {
-                assertEquals(0, set.size)
-            }
-
-            Then("should throw when first is invoked") {
-                assertFailsWith(NoSuchElementException::class) {
-                    set.first()
-                }
-            }
-        }
-
-        Scenario("getting first item") {
-            val item = "foo"
-            Given("a non-empty set") {
-                set.add(item)
-            }
-
-            lateinit var result: String
-
-            When("getting the first item") {
-                result = set.first()
-            }
-
-            Then("it should return the first item") {
-                assertEquals(item, result)
+                product.toJson() shouldEqual expectedResult
             }
         }
     }
