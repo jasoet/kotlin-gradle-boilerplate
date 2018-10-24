@@ -74,11 +74,11 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
 
-    testCompile ('org.jetbrains.spek:spek-api:1.1.5') {
+    testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
         exclude group: 'org.jetbrains.kotlin'
     }
-    testRuntime ('org.jetbrains.spek:spek-junit-platform-engine:1.1.5') {
-        exclude group: 'org.junit.platform'
+    
+    testRuntime("org.jetbrains.spek:spek-junit-platform-engine:$spekVersion") {
         exclude group: 'org.jetbrains.kotlin'
     }
 }
