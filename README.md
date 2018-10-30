@@ -5,8 +5,11 @@ Boilerplate code to create gradle based Kotlin application.
 ## Features
 - Kotlin/JVM with Kapt
 - Kotlin Coroutine
+- Arrow Library
+- Kotlinx Serializer
 - Strict Kotlin enable allWarningsAsErrors 
-- Unit test with [Spek](http://spekframework.org/), JUnit 5 and [Kluent](https://markusamshove.github.io/Kluent/)
+- Enable Kotlin Experimental Features
+- Unit test with [Spek2](http://spekframework.org/), JUnit 5, [Kluent](https://markusamshove.github.io/Kluent/) and [MockK](https://mockk.io/)
 - Static code check using [Detekt](https://github.com/arturbosch/detekt) 
 - Code coverage using Jacoco 
 - Logging with Logback
