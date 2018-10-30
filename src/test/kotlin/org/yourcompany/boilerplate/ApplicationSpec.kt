@@ -16,6 +16,7 @@
 
 package org.yourcompany.boilerplate
 
+import kotlinx.serialization.ImplicitReflectionSerializer
 import org.amshove.kluent.shouldEqual
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.context
@@ -24,6 +25,7 @@ import org.jetbrains.spek.api.dsl.it
 import org.yourcompany.boilerplate.serializer.ProductExample
 import org.yourcompany.boilerplate.serializer.toJson
 
+@ImplicitReflectionSerializer
 object ApplicationSpec : Spek({
     describe("A ProductExample") {
         val product = ProductExample("12", "Sepatu Naga", 200000, "Sepatu penyembur api")
@@ -32,7 +34,8 @@ object ApplicationSpec : Spek({
                 val expectedResult =
                     "{\"id\":\"12\",\"name\":\"Sepatu Naga\",\"price\":200000,\"description\":\"Sepatu penyembur api\"}"
 
-                product.toJson() shouldEqual expectedResult
+                val result = product.toJson()
+                result shouldEqual expectedResult
             }
         }
     }
