@@ -8,7 +8,7 @@ buildscript {
 
         jUnitVersion = "5.3.1"
 
-        spekVersion = "1.2.1"
+        spekVersion = "2.0.0-rc.1"
         ktorVersion = "1.0.0-beta-3"
         kluentVersion = "1.4"
         mockKVersion = "1.8.9.kotlin13"
@@ -78,11 +78,11 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
 
-    testCompile("org.jetbrains.spek:spek-api:$spekVersion") {
+    testImplementation ("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")  {
         exclude group: 'org.jetbrains.kotlin'
     }
-
-    testRuntime("org.jetbrains.spek:spek-junit-platform-engine:$spekVersion") {
+    testRuntimeOnly ("org.spekframework.spek2:spek-runner-junit5:$spekVersion") {
+        exclude group: 'org.junit.platform'
         exclude group: 'org.jetbrains.kotlin'
     }
 }
@@ -114,7 +114,7 @@ test {
     finalizedBy jacocoTestReport
 
     useJUnitPlatform {
-        includeEngines 'spek'
+        includeEngines 'spek2'
     }
 
     testLogging {

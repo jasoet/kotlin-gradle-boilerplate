@@ -16,16 +16,12 @@
 
 package org.yourcompany.boilerplate
 
-import kotlinx.serialization.ImplicitReflectionSerializer
 import org.amshove.kluent.shouldEqual
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.context
-import org.jetbrains.spek.api.dsl.describe
-import org.jetbrains.spek.api.dsl.it
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import org.yourcompany.boilerplate.serializer.ProductExample
 import org.yourcompany.boilerplate.serializer.toJson
 
-@ImplicitReflectionSerializer
 object ApplicationSpec : Spek({
     describe("A ProductExample") {
         val product = ProductExample("12", "Sepatu Naga", 200000, "Sepatu penyembur api")
