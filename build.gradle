@@ -118,7 +118,8 @@ test {
     }
 
     testLogging {
-        events "passed", "skipped", "failed"
+        exceptionFormat = "full"
+        events "failed","skipped"
     }
 }
 
