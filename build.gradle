@@ -11,7 +11,7 @@ buildscript {
         spekVersion = "2.0.0-rc.1"
         ktorVersion = "1.0.0-beta-3"
         kluentVersion = "1.4"
-        mockKVersion = "1.8.9.kotlin13"
+        mockKVersion = "1.8.10.kotlin13"
 
         logbackVersion = "1.2.3"
 
@@ -168,5 +168,5 @@ idea {
 task compile(dependsOn: "testClasses")
 
 wrapper {
-    gradleVersion = '4.10.2'
+    gradleVersion = '5.0-rc-1'
 }
