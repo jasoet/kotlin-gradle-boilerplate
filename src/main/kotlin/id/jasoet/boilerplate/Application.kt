@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.yourcompany.boilerplate
+package id.jasoet.boilerplate
 
 import org.slf4j.LoggerFactory
 

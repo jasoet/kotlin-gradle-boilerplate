@@ -1,4 +1,4 @@
-package org.yourcompany.boilerplate.serializer
+package id.jasoet.boilerplate.serializer
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON

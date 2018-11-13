@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package org.yourcompany.boilerplate
+package id.jasoet.boilerplate
 
 import org.amshove.kluent.shouldEqual
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import org.yourcompany.boilerplate.serializer.ProductExample
-import org.yourcompany.boilerplate.serializer.toJson
+import id.jasoet.boilerplate.serializer.ProductExample
+import id.jasoet.boilerplate.serializer.toJson
 
 object ApplicationSpec : Spek({
     describe("A ProductExample") {
-        val product = ProductExample("12", "Sepatu Naga", 200000, "Sepatu penyembur api")
+        val product =
+            ProductExample("12", "Sepatu Naga", 200000, "Sepatu penyembur api")
         context("when converted to Json String") {
             it("Should return correct Result") {
                 val expectedResult =

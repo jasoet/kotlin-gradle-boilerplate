@@ -9,15 +9,15 @@
         <encoder>
             <pattern>%date{dd MMM yyyy;HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %marker%n%ex{full}</pattern>
         </encoder>
-        <file>/var/log/example/application.log</file>
+        <file>/tmp/application.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/var/log/example/application.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>/tmp/application.log.%d{yyyy-MM-dd}</fileNamePattern>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
     </appender>
 
 
-    <logger name="org.yourcompany" level="INFO">
+    <logger name="id.jasoet.boilerplate" level="INFO">
         <appender-ref ref="FILE"/>
     </logger>
 

@@ -9,9 +9,9 @@ buildscript {
         jUnitVersion = "5.3.1"
 
         spekVersion = "2.0.0-rc.1"
-        ktorVersion = "1.0.0-beta-3"
+        ktorVersion = "1.0.0-beta-4"
         kluentVersion = "1.4"
-        mockKVersion = "1.8.10.kotlin13"
+        mockKVersion = "1.8.12.kotlin13"
 
         logbackVersion = "1.2.3"
 
@@ -37,15 +37,14 @@ plugins {
     id "io.gitlab.arturbosch.detekt" version "1.0.0.RC8"
 }
 
-group 'org.yourcompany'
-version '1.0-SNAPSHOT'
+group 'id.jasoet.boilerplate'
 
 apply plugin: "jacoco"
 apply plugin: "application"
 apply plugin: "idea"
 apply plugin: 'kotlinx-serialization'
 
-mainClassName = "org.yourcompany.boilerplate.Application"
+mainClassName = "id.jasoet.boilerplate.Application"
 
 repositories {
     maven { url "https://kotlin.bintray.com/kotlinx" }
@@ -78,10 +77,10 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
 
-    testImplementation ("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")  {
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion") {
         exclude group: 'org.jetbrains.kotlin'
     }
-    testRuntimeOnly ("org.spekframework.spek2:spek-runner-junit5:$spekVersion") {
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion") {
         exclude group: 'org.junit.platform'
         exclude group: 'org.jetbrains.kotlin'
     }
@@ -119,7 +118,7 @@ test {
 
     testLogging {
         exceptionFormat = "full"
-        events "failed","skipped"
+        events "passed", "failed", "skipped"
     }
 }
 
@@ -168,5 +167,5 @@ idea {
 task compile(dependsOn: "testClasses")
 
 wrapper {
-    gradleVersion = '5.0-rc-1'
+    gradleVersion = '5.0-rc-2'
 }
