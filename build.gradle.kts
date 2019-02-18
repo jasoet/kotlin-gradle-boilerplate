@@ -1,13 +1,13 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinVersion = "1.3.11"
-val coroutineVersion = "1.0.0"
-val serializationVersion = "0.9.0"
-val arrowVersion = "0.7.3"
-val jUnitVersion = "5.3.1"
-val spekVersion = "2.0.0-rc.1"
-val ktorVersion = "1.0.0"
+val kotlinVersion = "1.3.21"
+val coroutineVersion = "1.1.1"
+val serializationVersion = "0.10.0"
+val arrowVersion = "0.8.2"
+val jUnitVersion = "5.4.0"
+val spekVersion = "2.0.0"
+val ktorVersion = "1.1.2"
 val kluentVersion = "1.4"
 val mockKVersion = "1.8.13.kotlin13"
 val logbackVersion = "1.2.3"
@@ -22,15 +22,15 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-serialization:1.3.11")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:1.3.21")
     }
 }
 
 plugins {
     application
-    kotlin("jvm") version "1.3.11"
-    kotlin("kapt") version "1.3.11"
-    id("io.gitlab.arturbosch.detekt").version("1.0.0.RC8")
+    kotlin("jvm") version "1.3.21"
+    kotlin("kapt") version "1.3.21"
+    id("io.gitlab.arturbosch.detekt").version("1.0.0.RC9")
     jacoco
     idea
 }
@@ -92,16 +92,13 @@ tasks.jacocoTestReport {
 }
 
 detekt {
-    version = "1.0.0.RC9.2"
-    profile("main") {
-        input = "$projectDir/src/main/kotlin"
-        config = "$rootDir/detekt.yml"
-        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
-    }
+    version = "1.0.0.RC13"
+    config = files("$rootDir/detekt.yml")
+    filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
 }
 
 tasks.test {
-    finalizedBy(tasks.detektCheck, tasks.jacocoTestReport)
+    finalizedBy(tasks.detekt, tasks.jacocoTestReport)
 
     useJUnitPlatform {
         includeEngines("spek2")
@@ -123,7 +120,7 @@ tasks.withType<KotlinCompile> {
         apiVersion = "1.3"
         languageVersion = "1.3"
         allWarningsAsErrors = true
-        freeCompilerArgs += experimentalFlags
+        freeCompilerArgs = freeCompilerArgs + experimentalFlags
     }
 }
 
@@ -144,5 +141,5 @@ idea {
 }
 
 tasks.wrapper {
-    gradleVersion = "5.0"
+    gradleVersion = "5.2.1"
 }

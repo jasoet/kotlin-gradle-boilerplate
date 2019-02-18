@@ -1,7 +1,7 @@
 package id.jasoet.boilerplate.serializer
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.parse
 import kotlinx.serialization.stringify
 
@@ -9,9 +9,9 @@ import kotlinx.serialization.stringify
 data class ProductExample(val id: String, val name: String, val price: Int, val description: String)
 
 fun ProductExample.toJson(): String {
-    return JSON.stringify(this)
+    return Json.stringify(this)
 }
 
 fun String.toProductExample(): ProductExample {
-    return JSON.parse(this)
+    return Json.parse(this)
 }
