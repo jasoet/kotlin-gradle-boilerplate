@@ -1,21 +1,35 @@
 language: java
 jdk:
-  - openjdk11
+- openjdk11
+
+env:
+  global:
+    secure: YUPosBI+eWvR24Rl5s6rERIHjZahv465NU8wlKgJA/nQYUnVPO5Wn13PUvYVqXu3BQ3KdW30ca3s2GESu//+QWnJmfaNqmFiMp4ZnwcyawkRMkdUeEAf0be14RqfhgYuBo04pA4HMZ902G45lKqZqyyehySBhjctEPxQBuJ9y1U6a1Abd3hm7Vwt/k83nPsGEMrLiERIa3c4e4ab3DGGJ+gQGHpi1pmvWHCNFStOb/U2yf7n3eMoCXs9Xa5/WPh0SxyKgHM53XGGhmsJHkbzq1vIFZI4vCDNme5kpY/JqF7x0AYqmsC66qMn6736UToe6eeuuTHMXGzBb9pPuxgdgGbMxAmFk2BqGSzorAzaJRmC5Hqr4DULp6Bkor7DC2K5AjZqRLsbr/ZijNJaxV3ZOndRrGWDvEEKOrydF0E/ONr2kqKpArnni5ItcgASG6JVkPAs8bySalgojLFfo0cOKeicgqF57tiNB+0U7tKlnEZY2BpkeNDwqZ2MXnSNCRmm4ijcCAjSJ417L5bV9+4cKbClpYVetXltAV2WGj1o2QGzD2ZIeQEX8G6j4uLpPVYtL9CT6YSc/VIZUGZjbYQqFnnc6OPu+amusFo/qS+9K/FxnZ+x+O/84KwQ8tj9L7N1XVnkFRrQTsd4lTlMXO/tZytH5aRlRLiSR2q+SrWj9qQ=
 
 branches:
   only:
   - master
 
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 
 install:
-  - ./gradlew clean
-script:
-  - ./gradlew clean build
+- "./gradlew clean"
 
+script:
+- "./gradlew clean build"
+
+deploy:
+  provider: releases
+  api_key: "$TOKEN"
+  file_glob: true
+  skip_cleanup: true
+  overwrite: true
+  on:
+    tags: true
