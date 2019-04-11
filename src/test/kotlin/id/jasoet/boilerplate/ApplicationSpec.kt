@@ -16,24 +16,11 @@
 
 package id.jasoet.boilerplate
 
-import org.amshove.kluent.shouldEqual
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
-import id.jasoet.boilerplate.serializer.ProductExample
-import id.jasoet.boilerplate.serializer.toJson
 
 object ApplicationSpec : Spek({
     describe("A ProductExample") {
-        val product =
-            ProductExample("12", "Sepatu Naga", 200000, "Sepatu penyembur api")
-        context("when converted to Json String") {
-            it("Should return correct Result") {
-                val expectedResult =
-                    "{\"id\":\"12\",\"name\":\"Sepatu Naga\",\"price\":200000,\"description\":\"Sepatu penyembur api\"}"
 
-                val result = product.toJson()
-                result shouldEqual expectedResult
-            }
-        }
     }
 })

@@ -3,47 +3,25 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val kotlinVersion = "1.3.21"
 val coroutineVersion = "1.1.1"
-val serializationVersion = "0.10.0"
-val arrowVersion = "0.8.2"
-val jUnitVersion = "5.4.0"
-val spekVersion = "2.0.0"
-val ktorVersion = "1.1.2"
-val kluentVersion = "1.4"
-val mockKVersion = "1.8.13.kotlin13"
+val jUnitVersion = "5.4.2"
+val spekVersion = "2.0.2"
+val kluentVersion = "1.49"
+val easyRandomVersion = "4.0.0.RC1"
 val logbackVersion = "1.2.3"
-val experimentalFlags = listOf(
-    "-Xuse-experimental=kotlin.Experimental",
-    "-Xuse-experimental=kotlin.ExperimentalMultiplatform",
-    "-Xuse-experimental=kotlinx.serialization.ImplicitReflectionSerializer"
-)
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-serialization:1.3.21")
-    }
-}
+val mockKVersion = "1.9.3"
 
 plugins {
     application
     kotlin("jvm") version "1.3.21"
-    kotlin("kapt") version "1.3.21"
     id("io.gitlab.arturbosch.detekt").version("1.0.0.RC9")
-    jacoco
-    idea
-}
 
-apply {
-    plugin("kotlinx-serialization")
+    jacoco
 }
 
 repositories {
     mavenLocal()
     mavenCentral()
     jcenter()
-    maven { url = uri("https://kotlin.bintray.com/kotlinx") }
 }
 
 group = "id.jasoet.boilerplate"
@@ -58,41 +36,35 @@ dependencies {
     implementation(kotlin("reflect"))
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    implementation("io.arrow-kt:arrow-core:$arrowVersion")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
-    testImplementation("org.amshove.kluent:kluent:$kluentVersion")
-    testImplementation("io.mockk:mockk:$mockKVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
-    testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion") {
-        exclude(group = "org.jetbrains.kotlin")
-    }
-    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion") {
-        exclude(group = "org.junit.platform")
-        exclude(group = "org.jetbrains.kotlin")
-    }
+    testImplementation("org.amshove.kluent:kluent:$kluentVersion")
+    testImplementation("io.mockk:mockk:$mockKVersion")
+    testImplementation("org.jeasy:easy-random-core:$easyRandomVersion")
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
 }
 
 jacoco {
-    toolVersion = "0.8.2"
+    toolVersion = "0.8.3"
 }
 
 tasks.jacocoTestReport {
     group = "Reporting"
     reports {
         xml.isEnabled = true
-        html.isEnabled = false
+        html.isEnabled = true
         csv.isEnabled = false
     }
 }
 
 detekt {
-    version = "1.0.0.RC13"
+    version = "1.0.0.RC14"
     config = files("$rootDir/detekt.yml")
     filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
 }
@@ -101,7 +73,7 @@ tasks.test {
     finalizedBy(tasks.detekt, tasks.jacocoTestReport)
 
     useJUnitPlatform {
-        includeEngines("spek2")
+        includeEngines("junit-jupiter","spek2")
     }
 
     testLogging {
@@ -120,26 +92,9 @@ tasks.withType<KotlinCompile> {
         apiVersion = "1.3"
         languageVersion = "1.3"
         allWarningsAsErrors = true
-        freeCompilerArgs = freeCompilerArgs + experimentalFlags
-    }
-}
-
-idea {
-    module {
-        isDownloadJavadoc = true
-        isDownloadSources = true
-
-        sourceDirs.add(File("build/generated/source/kapt/main"))
-        testSourceDirs.add(File("build/generated/source/kapt/test"))
-
-        sourceDirs.add(File("build/generated/source/kaptKotlin/main"))
-        testSourceDirs.add(File("build/generated/source/kaptKotlin/test"))
-
-        sourceDirs.add(File("build/tmp/kapt/main/kotlinGenerated"))
-        testSourceDirs.add(File("build/tmp/kapt/test/kotlinGeneratedst"))
     }
 }
 
 tasks.wrapper {
-    gradleVersion = "5.2.1"
+    gradleVersion = "5.3.1"
 }
