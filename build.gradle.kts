@@ -1,18 +1,18 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinVersion = "1.3.21"
-val coroutineVersion = "1.1.1"
+val kotlinVersion = "1.3.31"
+val coroutineVersion = "1.2.1"
 val jUnitVersion = "5.4.2"
-val spekVersion = "2.0.2"
+val spekVersion = "2.0.5"
 val kluentVersion = "1.49"
-val easyRandomVersion = "4.0.0.RC1"
+val easyRandomVersion = "4.0.0"
 val logbackVersion = "1.2.3"
 val mockKVersion = "1.9.3"
 
 plugins {
     application
-    kotlin("jvm") version "1.3.21"
+    kotlin("jvm") version "1.3.31"
     id("io.gitlab.arturbosch.detekt").version("1.0.0.RC9")
 
     jacoco
@@ -64,7 +64,7 @@ tasks.jacocoTestReport {
 }
 
 detekt {
-    version = "1.0.0.RC14"
+    version = "1.0.0.RC15"
     config = files("$rootDir/detekt.yml")
     filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
 }
@@ -96,5 +96,5 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.wrapper {
-    gradleVersion = "5.3.1"
+    gradleVersion = "5.4.1"
 }
