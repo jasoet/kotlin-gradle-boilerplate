@@ -1,11 +1,11 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinVersion = "1.3.31"
-val coroutineVersion = "1.2.1"
+val kotlinVersion = "1.3.40"
+val coroutineVersion = "1.2.2"
 val jUnitVersion = "5.4.2"
 val spekVersion = "2.0.5"
-val kluentVersion = "1.49"
+val kluentVersion = "1.51"
 val easyRandomVersion = "4.0.0"
 val logbackVersion = "1.2.3"
 val mockKVersion = "1.9.3"
