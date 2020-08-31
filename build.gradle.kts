@@ -1,20 +1,20 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinVersion = "1.3.50"
-val coroutineVersion = "1.3.0"
+val kotlinVersion = "1.4.0"
+val coroutineVersion = "1.3.9"
 val logbackVersion = "1.2.3"
 
-val jUnitVersion = "5.4.2"
-val spekVersion = "2.0.5"
+val jUnitVersion = "5.6.2"
+val spekVersion = "2.0.12"
 val kluentVersion = "1.51"
-val easyRandomVersion = "4.0.0"
-val mockKVersion = "1.9.3"
+val easyRandomVersion = "4.2.0"
+val mockKVersion = "1.10.0"
 
 plugins {
     application
-    kotlin("jvm") version "1.3.50"
-    id("io.gitlab.arturbosch.detekt").version("1.0.1")
+    kotlin("jvm") version "1.4.0"
+    id("io.gitlab.arturbosch.detekt").version("1.12.0")
 
     jacoco
 }
@@ -52,7 +52,7 @@ dependencies {
 }
 
 jacoco {
-    toolVersion = "0.8.4"
+    toolVersion = "0.8.6"
 }
 
 tasks.jacocoTestReport {
@@ -65,7 +65,7 @@ tasks.jacocoTestReport {
 }
 
 detekt {
-    version = "1.0.1"
+    version = "1.12.0"
     config = files("$rootDir/detekt.yml")
 }
 
@@ -84,17 +84,17 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
 
-    sourceCompatibility = "1.8"
-    targetCompatibility = "1.8"
+    sourceCompatibility = "11"
+    targetCompatibility = "11"
 
     kotlinOptions {
-        jvmTarget = "1.8"
-        apiVersion = "1.3"
-        languageVersion = "1.3"
+        jvmTarget = "11"
+        apiVersion = "1.4"
+        languageVersion = "1.4"
         allWarningsAsErrors = true
     }
 }
 
 tasks.wrapper {
-    gradleVersion = "5.6.1"
+    gradleVersion = "6.6.1"
 }
