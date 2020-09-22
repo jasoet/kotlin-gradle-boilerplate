@@ -1,7 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinVersion = "1.4.0"
 val coroutineVersion = "1.3.9"
 val logbackVersion = "1.2.3"
 
@@ -14,7 +13,7 @@ val mockKVersion = "1.10.0"
 plugins {
     application
     kotlin("jvm") version "1.4.0"
-    id("io.gitlab.arturbosch.detekt").version("1.12.0")
+    id("io.gitlab.arturbosch.detekt").version("1.13.1")
 
     jacoco
 }
@@ -65,8 +64,12 @@ tasks.jacocoTestReport {
 }
 
 detekt {
-    version = "1.12.0"
-    config = files("$rootDir/detekt.yml")
+    toolVersion = "1.13.1"                                 // Version of Detekt that will be used. When unspecified the latest detekt version found will be used. Override to stay on the same version.
+    input = files("src/main/java", "src/main/kotlin")     // The directories where detekt looks for source files. Defaults to `files("src/main/java", "src/main/kotlin")`.
+    parallel = true                                      // Builds the AST in parallel. Rules are always executed in parallel. Can lead to speedups in larger projects. `false` by default.
+    config = files("$rootDir/detekt.yml")                  // Define the detekt configuration(s) you want to use. Defaults to the default detekt configuration.
+    disableDefaultRuleSets = false                        // Disables all default detekt rulesets and will only run detekt with custom rules defined in plugins passed in with `detektPlugins` configuration. `false` by default.
+    ignoreFailures = false                                // If set to `true` the build does not fail when the maxIssues count was reached. Defaults to `false`.
 }
 
 tasks.test {
